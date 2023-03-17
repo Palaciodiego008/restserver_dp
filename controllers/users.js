@@ -1,8 +1,5 @@
 import { response, request } from "express"
 
-
-
-
 const getUsers = (req = request,  res = response) => {
     const query = req.query;
     res.json({
