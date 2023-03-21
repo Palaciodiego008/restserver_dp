@@ -1,6 +1,6 @@
 import { response, request } from "express"
 import User from "../models/user.js"
-
+import bcryptjs from 'bcryptjs'
 
 const getUsers = (req = request,  res = response) => {
     const query = req.query;
@@ -21,13 +21,21 @@ const putUsers = (req,  res = response) => {
 
 
 const postUsers = async (req,  res = response) => {
-    const body = req.body;
-    const user = new User(body);
+    const {name, email, password, role} = req.body;
+    const user = new User({name, email, password, role});
 
+
+    // Check if the email exists
+    
+
+    // Encrypt password
+    const salt = bcryptjs.genSaltSync();
+    user.password = bcryptjs.hashSync(password, salt);
+
+    // Save in DB
     await user.save()
 
     res.status(201).json({
-        msg: 'post API - controller',
         user
     })
 }
