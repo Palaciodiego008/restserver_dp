@@ -10,13 +10,9 @@ let validations = [
 ]
 
 router.get('/', getUsers)
-
 router.put('/:id', putUsers)
-
 router.post('/', validations ,postUsers)
-
 router.delete('/', deleteUsers)
-
 
 
 export default router;
