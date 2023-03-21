@@ -1,6 +1,7 @@
 import { response, request } from "express"
 import User from "../models/user.js"
 import bcryptjs from 'bcryptjs'
+import { validationResult } from "express-validator"
 
 const getUsers = (req = request,  res = response) => {
     const query = req.query;
@@ -21,11 +22,26 @@ const putUsers = (req,  res = response) => {
 
 
 const postUsers = async (req,  res = response) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors
+        })
+    }
+
     const {name, email, password, role} = req.body;
     const user = new User({name, email, password, role});
 
 
     // Check if the email exists
+    const existEmail = await User.findOne({email});
+    if (existEmail) {
+        return res.status(400).json({
+            msg: 'Email already exists'
+        })
+    }
     
 
     // Encrypt password
