@@ -5,6 +5,9 @@ import { validationResult } from "express-validator"
 
 const getUsers = (req = request,  res = response) => {
     const query = req.query;
+
+    console.log(User.collection);
+
     res.json({
         msg: 'get API - controller',
         query: query
