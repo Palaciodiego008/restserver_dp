@@ -30,7 +30,7 @@ const postUsers = async (req,  res = response) => {
 
     if (!errors.isEmpty()) {
         return res.status(400).json({
-            errors
+            errors: errors.mapped() // is an array of errors that we can show to the user 
         })
     }
 
