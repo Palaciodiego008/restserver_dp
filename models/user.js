@@ -31,6 +31,10 @@ const UserSchema = mongoose.Schema({
         type:Boolean,
         default: false
     },
+    github: {
+        type:Boolean,
+        default: false
+    },
 })
 
 
