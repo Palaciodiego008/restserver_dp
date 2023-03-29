@@ -35,6 +35,10 @@ const UserSchema = mongoose.Schema({
         type:Boolean,
         default: false
     },
+    facebook: {
+        type:Boolean,
+        default: false
+    },
 })
 
 
